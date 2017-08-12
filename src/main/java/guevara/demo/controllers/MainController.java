@@ -116,13 +116,18 @@ public class MainController {
 
 
     @GetMapping("/report")
-    public String repoFinal(Model toSend, @ModelAttribute("resume") Resume resume){
+    public String repoFinal(Model sendModel, @ModelAttribute("resume") Resume resume){
 
 
+        Iterable<Resume> res = resumeRepository.findAll();
         Iterable<Educational> educ = educationalRepository.findAll();
         Iterable<Work> workexp = workRepository.findAll();
         Iterable<Skill> skiller = skillRepository.findAll();
 
+        sendModel.addAttribute("listofcostumer",res);
+        sendModel.addAttribute("listofeduc",educ);
+        sendModel.addAttribute("listofwork",workexp);
+        sendModel.addAttribute("listofskiller",skiller);
 
 
         return "report";

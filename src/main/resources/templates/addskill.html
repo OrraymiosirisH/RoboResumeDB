@@ -41,6 +41,7 @@
                         <div class="clearfix"></div>
                         <div class="form-group col-lg-12">
                             <textarea th:field="*{ski}" name="ski" class="form-control" rows="6"></textarea>
+                            <span th:if="${#fields.hasErrors('ski')}" th:errors="*{ski}"></span><br />
                         </div>
                         <div class="form-group col-lg-12">
                             <input type="hidden" name="save" value="contact">
