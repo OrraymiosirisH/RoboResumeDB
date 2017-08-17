@@ -24,8 +24,15 @@ public class Resume {
 
     @NotNull
     @Size(min=3, max=30)
+    private String lastname;
+
+    @NotNull
+    @Size(min=3, max=30)
     private String email;
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;
@@ -45,5 +52,13 @@ public class Resume {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 }

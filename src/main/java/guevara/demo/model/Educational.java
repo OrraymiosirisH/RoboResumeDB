@@ -70,4 +70,12 @@ public class Educational {
     public void setDegree(String degree) {
         this.degree = degree;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

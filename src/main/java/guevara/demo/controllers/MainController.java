@@ -13,14 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-
 
 
 @Controller
@@ -30,6 +25,13 @@ public class MainController {
 
     @Autowired
     ResumeRepository resumeRepository;
+    @Autowired
+    EducationalRepository educationalRepository;
+    @Autowired
+    WorkRepository workRepository;
+    @Autowired
+    SkillRepository skillRepository;
+
 
     @GetMapping("/welcome")
     public String loadTvForm(Model toSend) {
@@ -46,47 +48,43 @@ public class MainController {
         }
 
 //add the book to the database
-            System.out.println("*adding a new Entry");
-//      System.out.println(resume.getResumename());
-            resumeRepository.save(resume);
+        System.out.println("*adding a new Entry");
 
-            return "Message1";
-        }
+        resumeRepository.save(resume);
+
+        return "Message1";
+    }
 
 
-        @Autowired
-        EducationalRepository educationalRepository;
+    @GetMapping("/addedu")
+    public String loadEdu(Model toSend) {
+        toSend.addAttribute("educational", new Educational());
+        return "addedu";
+    }
 
-        @GetMapping("/addedu")
-        public String loadEdu (Model toSend){
-            toSend.addAttribute("educational", new Educational());
+
+    @PostMapping("/addedu")
+    public String processEdu(@Valid @ModelAttribute("educational") Educational educational, BindingResult lista) {
+        if (lista.hasErrors()) {
             return "addedu";
-        }
-    //,@ModelAttribute("resume") Resume resume
-        @PostMapping("/addedu")
-        public String processEdu (@Valid @ModelAttribute("educational") Educational educational, BindingResult lista){
-            if (lista.hasErrors()) {
-                return "addedu";
-               // @ModelAttribute("resume") Resume resume,
-            }
 
-            System.out.println("*adding a new Entry");
-            educationalRepository.save(educational);
-
-            return "message2";
         }
 
-    @Autowired
-    WorkRepository workRepository;
+        System.out.println("*adding a new Entry");
+        educationalRepository.save(educational);
+
+        return "message2";
+    }
+
 
     @GetMapping("/addwork")
-    public String loadExp (Model toSend){
+    public String loadExp(Model toSend) {
         toSend.addAttribute("work", new Work());
         return "addwork";
     }
 
     @PostMapping("/addwork")
-    public String processExp (@Valid @ModelAttribute("work") Work work, BindingResult audi){
+    public String processExp(@Valid @ModelAttribute("work") Work work, BindingResult audi) {
         if (audi.hasErrors()) {
             return "addwork";
 
@@ -98,34 +96,30 @@ public class MainController {
     }
 
 
-    @Autowired
-    SkillRepository skillRepository;
-
-
     @GetMapping("/addskill")
-    public String loadSk (Model toSend){
+    public String loadSk(Model toSend) {
         toSend.addAttribute("skill", new Skill());
         return "addskill";
     }
 
     @PostMapping("/addskill")
-    public String processSk (@Valid @ModelAttribute("skill") Skill skill, BindingResult honda) {
+    public String processSk(@Valid @ModelAttribute("skill") Skill skill, BindingResult honda) {
 
-            if (honda.hasErrors()) {
-                return "addskill";
+        if (honda.hasErrors()) {
+            return "addskill";
 
-            }
+        }
 
-            System.out.println("*adding a new Entry");
-            System.out.println("*adding a new Entry" + i++);
-            skillRepository.save(skill);
-            return "message4";
+        System.out.println("*adding a new Entry");
+        System.out.println("*adding a new Entry" + i++);
+        skillRepository.save(skill);
+        return "message4";
 
 
     }
 
     @GetMapping("/report")
-    public String repoFinal(Model sendModel, @ModelAttribute("resume") Resume resume){
+    public String repoFinal(Model sendModel, @ModelAttribute("resume") Resume resume) {
 
 
         Iterable<Resume> res = resumeRepository.findAll();
@@ -133,10 +127,10 @@ public class MainController {
         Iterable<Work> workexp = workRepository.findAll();
         Iterable<Skill> skiller = skillRepository.findAll();
 
-        sendModel.addAttribute("listofcostumer",res);
-        sendModel.addAttribute("listofeduc",educ);
-        sendModel.addAttribute("listofwork",workexp);
-        sendModel.addAttribute("listofskiller",skiller);
+        sendModel.addAttribute("listofcostumer", res);
+        sendModel.addAttribute("listofeduc", educ);
+        sendModel.addAttribute("listofwork", workexp);
+        sendModel.addAttribute("listofskiller", skiller);
 
 
         return "report";
@@ -144,9 +138,7 @@ public class MainController {
 
     @RequestMapping("/final")
 
-    public String sayhello(){
-
-
+    public String sayhello() {
 
         return "final";
 
@@ -154,6 +146,118 @@ public class MainController {
     }
 
 
+
+    @RequestMapping("/personal")
+
+    public String myPersonal(Model model) {
+            model.addAttribute ("allpersonal", resumeRepository.findAll());
+
+        return "personal";
+
+
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateResume(@PathVariable("id") long id, Model model){
+        model.addAttribute("resume", resumeRepository.findOne(id));
+        return "welcome2";
+    }
+
+
+
+    @PostMapping("/welcome2")
+    public String processPersmod(@Valid @ModelAttribute("resume") Resume resume, BindingResult venezzia) {
+        if (venezzia.hasErrors()) {
+            return "welcome2";
+
+        }
+
+//Modifing
+        System.out.println("*Modifying an Entry");
+
+        resumeRepository.save(resume);
+
+        return "redirect:/personal";
+    }
+
+    // Educational Area.
+
+    @RequestMapping("/education")
+
+    public String myEduca(Model model) {
+        model.addAttribute ("alleducational", educationalRepository.findAll());
+
+        return "education";
+
+
+    }
+
+    @RequestMapping("/updateedu/{id}")
+    public String updateEduc(@PathVariable("id") long id, Model model){
+        model.addAttribute("educational", educationalRepository.findOne(id));
+        return "editedu";
+    }
+
+    @RequestMapping("/deleteedu/{id}")
+    public String delEdu(@PathVariable("id") long id) {
+        educationalRepository.delete(id);
+        return "redirect:/education";
+    }
+
+
+    @PostMapping("/editedu")
+    public String processEdumod(@Valid @ModelAttribute("educational") Educational educational, BindingResult milano){
+        if (milano.hasErrors()) {
+            return "editedu";
+
+        }
+
+//Modifing
+        System.out.println("*Modifying an educational Entry");
+
+        educationalRepository.save(educational);
+
+        return "redirect:/education";
+    }
+
+//Work area
+@RequestMapping("/workout")
+
+public String myWorka(Model model) {
+    model.addAttribute ("allwork", workRepository.findAll());
+
+    return "workout";
+
+
+}
+
+    @RequestMapping("/updatework/{id}")
+    public String updateWorka(@PathVariable("id") long id, Model model){
+        model.addAttribute("work", workRepository.findOne(id));
+        return "editwork";
+    }
+
+    @RequestMapping("/deletework/{id}")
+    public String delWorka(@PathVariable("id") long id) {
+        workRepository.delete(id);
+        return "redirect:/workout";
+    }
+
+
+    @PostMapping("/editwork")
+    public String processEwork(@Valid @ModelAttribute("work") Work work, BindingResult sevilla){
+        if (sevilla.hasErrors()) {
+            return "editwork";
+
+        }
+
+//Modifing
+        System.out.println("*Modifying an work Entry");
+
+        workRepository.save(work);
+
+        return "redirect:/workout";
+    }
 
 
 }

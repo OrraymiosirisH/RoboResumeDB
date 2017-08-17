@@ -69,4 +69,12 @@ public class Work {
     public void setDuties(String duties) {
         this.duties = duties;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
