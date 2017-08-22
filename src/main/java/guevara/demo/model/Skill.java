@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 public class Skill {
 
 
+
     @GeneratedValue(strategy = GenerationType.AUTO)
 
 
@@ -30,4 +31,15 @@ public class Skill {
     public void setSki(String ski) {
         this.ski = ski;
     }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
 }

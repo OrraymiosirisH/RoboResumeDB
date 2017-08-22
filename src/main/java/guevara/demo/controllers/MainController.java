@@ -259,6 +259,45 @@ public String myWorka(Model model) {
         return "redirect:/workout";
     }
 
+    //skill area
+    @RequestMapping("/skiller")
+
+    public String mySkill(Model model) {
+        model.addAttribute ("allskill", skillRepository.findAll());
+
+        return "skiller";
+
+
+    }
+
+    @RequestMapping("/updateskill/{id}")
+    public String updateSkill(@PathVariable("id") long id, Model model){
+        model.addAttribute("skill", skillRepository.findOne(id));
+        return "editskill";
+    }
+
+    @RequestMapping("/deleteskill/{id}")
+    public String delSkill(@PathVariable("id") long id) {
+        skillRepository.delete(id);
+        return "redirect:/skiller";
+    }
+
+
+    @PostMapping("/editskill")
+    public String processSkill(@Valid @ModelAttribute("work") Skill skill, BindingResult bologna){
+        if (bologna.hasErrors()) {
+            return "editskill";
+
+        }
+
+//Modifing
+        System.out.println("*Modifying a skill Entry");
+
+        skillRepository.save(skill);
+
+        return "redirect:/skiller";
+    }
+
 
 }
 
