@@ -1,99 +1,113 @@
-<title><!DOCTYPE html>
+<!DOCTYPE html>
         <html lang="en" xmlns:th="www.thymeleaf.org">
         <head>
             <meta charset="UTF-8"/>
             <title>Add Work Ex...</title>
 
-            <!-- Bootstrap Core CSS -->
-            <link href="css/bootstrap.min.css" rel="stylesheet">
+            <!-- Bootstrap core CSS -->
+            <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-            <!-- Custom CSS -->
-            <link href="css/business-casual.css" rel="stylesheet">
+            <!-- Custom fonts for this template -->
+            <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+            <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-            <!-- Fonts -->
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-            <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-
-            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-            <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-            <![endif]-->
-
+            <!-- Custom styles for this template -->
+            <link href="../css/clean-blog.min.css" rel="stylesheet">
         </head>
 <body>
 
-<div class="row">
-    <div class="box">
-        <div class="col-lg-12">
-            <hr>
-            <h2 class="intro-text text-center">Robo Resume
-                <strong>Application</strong>
-            </h2>
-            <hr>
-            <!--<p th:text="'Name: ' + ${resume.name}" />
-            <p th:text="'Email: ' + ${resume.email}" />-->
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-20 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Robo Resume App</h1>
+                    <span class="subheading">Work Expirience.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
             <p>Add your Work Expirience:</p>
-            <form role="form"th:action="@{/addwork}" th:object="${work}" method="post">
-                <div class="row">
-                    <div class="form-group col-lg-2">
+            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+            <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+            <form role="form"th:action="@{/addwork}" th:object="${work}" method="post" name="sentMessage">
+                <p><input type="hidden" th:field="*{id}"/></p>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
                         <label>Company</label>
-                        <input th:field="*{company}" name="company" class="form-control" type="text">
+                        <input th:field="*{company}" type="text" class="form-control" placeholder="Company">
+                        <p class="help-block text-danger"></p>
                         <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span><br />
                     </div>
-                    <div class="form-group col-lg-2">
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
                         <label>Job/Title</label>
-                        <input th:field="*{job}" name="job" class="form-control" type="text">
+                        <input th:field="*{job}" type="text" class="form-control" placeholder="Job Title">
+                        <p class="help-block text-danger"></p>
+                        <span th:if="${#fields.hasErrors('job')}" th:errors="*{job}"></span><br />
                     </div>
-                    <div class="form-group col-lg-2">
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
                         <label>Supervisor</label>
-                        <input th:field="*{sup}" name="sup" class="form-control" type="text">
+                        <input th:field="*{sup}" type="text" class="form-control" placeholder="Supervisor" >
+                        <p class="help-block text-danger"></p>
+                        <span th:if="${#fields.hasErrors('sup')}" th:errors="*{sup}"></span><br />
                     </div>
-                    <div class="form-group col-lg-2">
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
                         <label>Telephone</label>
-                        <input th:field="*{tel}" name="tel" class="form-control" type="tel">
+                        <input th:field="*{tel}" type="text" class="form-control" placeholder="Contact Phone" >
+                        <p class="help-block text-danger"></p>
+                        <span th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></span><br />
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="form-group col-lg-12">
-                        <label>Duties</label>
-                        <textarea th:field="*{duties}" name="duties" class="form-control" rows="6"></textarea>
+                </div>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Duties</label><input th:field="*{duties}" type="text" class="form-control" placeholder="Duties">
+                        <p class="help-block text-danger"></p>
+                        <span th:if="${#fields.hasErrors('duties')}" th:errors="*{duties}"></span><br />
                     </div>
-                    <div class="form-group col-lg-12">
-                        <input type="hidden" name="save" value="contact">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary" id="sendMessageButton">Send</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-</div>
 
-<!--
-<form action="#" th:action="@{/tvform}" th:object="${tvshow}" method="post" >
-   Id:<input type="number" th:field="*{id}" />
-    <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span><br />
+<div th:replace="base1 :: footer"></div>
 
 
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    Name:<input type="text" th:field="*{name}" />
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br />
-    Type:<input type="text" th:field="*{type}" />
-    <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span><br />
-    Description:<textarea rows="3" th:field="*{description}" />
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br />
+<!-- Contact Form JavaScript -->
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/contact_me.js"></script>
 
-    <input type="submit" value="Submit" />
-</form>
--->
+<!-- Custom scripts for this template -->
+<script src="js/clean-blog.min.js"></script>
 
-</body>
-</title>
-</head>
-<body>
 
 </body>
 </html>

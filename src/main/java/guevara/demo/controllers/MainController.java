@@ -47,7 +47,7 @@ public class MainController {
 
         }
 
-//add the book to the database
+
         System.out.println("*adding a new Entry");
 
         resumeRepository.save(resume);
@@ -300,8 +300,6 @@ public String myWorka(Model model) {
 
 
 }
-
-
 
 
 
