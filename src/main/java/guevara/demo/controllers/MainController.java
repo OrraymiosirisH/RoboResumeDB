@@ -33,15 +33,20 @@ public class MainController {
     SkillRepository skillRepository;
 
 
-    @GetMapping("/welcome")
-    public String loadTvForm(Model toSend) {
+    @RequestMapping("/login")
+public String Login(){
+
+        return "login";
+    }
+
+    @GetMapping("/")
+    public String loadIndex(Model toSend) {
         toSend.addAttribute("resume", new Resume());
         return "welcome";
-
     }
 
     @PostMapping("/welcome")
-    public String processTvForm(@Valid @ModelAttribute("resume") Resume resume, BindingResult result) {
+    public String processIndex(@Valid @ModelAttribute("resume") Resume resume, BindingResult result) {
         if (result.hasErrors()) {
             return "welcome";
 
@@ -54,7 +59,6 @@ public class MainController {
 
         return "Message1";
     }
-
 
     @GetMapping("/addedu")
     public String loadEdu(Model toSend) {

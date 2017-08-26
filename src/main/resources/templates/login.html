@@ -1,8 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8"/>
-    <title>Modify a person</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +21,6 @@
     <!-- Custom styles for this template -->
     <link href="../css/clean-blog.min.css" rel="stylesheet">
 
-
 </head>
 <body>
 
@@ -25,51 +30,43 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
-                    <h1>Final Report</h1>
-                    <span class="subheading">DataBase Edition.</span>
+                    <h1>Robo Resume.</h1>
+                    <span class="subheading">DataBase-Login Page.</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
 <!-- Main Content -->
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <p>Plese Reenter the correct information.</p>
-            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-            <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-            <form role="form"th:action="@{/welcome2}" th:object="${resume}" method="post" name="sentMessage">
-                <p><input type="hidden" th:field="*{id}"/></p>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Name</label>
-                        <input th:field="*{name}" type="text" class="form-control" placeholder="Name">
-                        <p class="help-block text-danger"></p>
-                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Last Name</label>
-                        <input th:field="*{lastname}" type="text" class="form-control" placeholder="Last Name">
-                        <p class="help-block text-danger"></p>
-                        <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{name}"></span><br />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls">
-                        <label>Email Address</label>
-                        <input th:field="*{email}" type="email" class="form-control" placeholder="Email Address" >
-                        <p class="help-block text-danger"></p>
-                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br />
-                    </div>
-                </div>
 
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form role="form"th:action="@{/login}" method="post">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>User</label>
+                        <input type="text" placeholder="Username" name="username">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" name="password" >
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
                 <br>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-secondary" id="sendMessageButton">Send</button>
+                    <button type="submit" class="btn btn-secondary">Sign In</button>
                 </div>
             </form>
         </div>
@@ -97,3 +94,26 @@
 
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="www.thymeleaf.org">-->
+<!--<head>-->
+<!--<meta charset="UTF-8" />-->
+<!--<title>Spring Security Example</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div th:if="${param.error}">-->
+<!--Invalid username and password.-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--You have been logged out.-->
+<!--</div>-->
+<!--<form th:action="@{/login}" method="post">-->
+<!--<div><label>User Name: <input type="text" name="username"/></label></div>-->
+<!--<div><label>Password: <input type="password" name="password"/></label></div>-->
+<!--<div><input type="submit" value="Sign In"/></div>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
