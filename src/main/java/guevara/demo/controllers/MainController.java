@@ -57,14 +57,28 @@ public String Login(){
 
         resumeRepository.save(resume);
 
-        return "Message1";
+        return "redirect:/Message1";
     }
 
-    @GetMapping("/addedu")
-    public String loadEdu(Model toSend) {
-        toSend.addAttribute("educational", new Educational());
+   @RequestMapping("/Message1")
+   public String messPass(Model model){
+    model.addAttribute("reslist", resumeRepository.findAll());
+
+    return "Message1";
+
+   }
+
+
+    @RequestMapping("/addedu/{id}")
+    public String loadEdu(@PathVariable("id") long id, Model model) {
+        model.addAttribute("resume", resumeRepository.findOne(id));
+        Educational educational= new Educational();
+        educational.setResume(resumeRepository.findOne(id));
+        model.addAttribute("educational", educational);
         return "addedu";
-    }
+
+
+   }
 
 
     @PostMapping("/addedu")
@@ -77,15 +91,19 @@ public String Login(){
         System.out.println("*adding a new Entry");
         educationalRepository.save(educational);
 
-        return "message2";
+        return "redirect:/Message1";
     }
 
-
-    @GetMapping("/addwork")
-    public String loadExp(Model toSend) {
-        toSend.addAttribute("work", new Work());
+    @RequestMapping("/addwork/{id}")
+    public String loadwok(@PathVariable("id") long id, Model model) {
+        model.addAttribute("resume", resumeRepository.findOne(id));
+        Work work = new Work();
+        work.setResume(resumeRepository.findOne(id));
+        model.addAttribute("work", work);
         return "addwork";
     }
+
+
 
     @PostMapping("/addwork")
     public String processExp(@Valid @ModelAttribute("work") Work work, BindingResult audi) {
@@ -96,15 +114,27 @@ public String Login(){
 
         System.out.println("*adding a new Entry");
         workRepository.save(work);
-        return "message3";
+        return "redirect:/Message1";
     }
 
 
-    @GetMapping("/addskill")
-    public String loadSk(Model toSend) {
-        toSend.addAttribute("skill", new Skill());
+//    @GetMapping("/addskill")
+//    public String loadSk(Model model) {
+//        model.addAttribute("skill", new Skill());
+//        return "addskill";
+//    }
+
+    @RequestMapping("/addskill/{id}")
+    public String loadskl(@PathVariable("id") long id, Model model) {
+        model.addAttribute("resume", resumeRepository.findOne(id));
+        Skill skill = new Skill();
+        skill.setResume(resumeRepository.findOne(id));
+        model.addAttribute("skill", skill);
         return "addskill";
     }
+
+
+
 
     @PostMapping("/addskill")
     public String processSk(@Valid @ModelAttribute("skill") Skill skill, BindingResult honda) {
@@ -117,7 +147,7 @@ public String Login(){
         System.out.println("*adding a new Entry");
         System.out.println("*adding a new Entry" + i++);
         skillRepository.save(skill);
-        return "message4";
+        return "redirect:/Message1";
 
 
     }

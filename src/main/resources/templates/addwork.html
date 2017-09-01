@@ -5,10 +5,10 @@
             <title>Add Work Ex...</title>
 
             <!-- Bootstrap core CSS -->
-            <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
             <!-- Custom fonts for this template -->
-            <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
             <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
             <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -18,7 +18,7 @@
 <body>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+<header class="masthead" style="background-image: url('../img/contact-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-20 col-md-10 mx-auto">
@@ -40,7 +40,8 @@
             <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
             <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
             <form role="form"th:action="@{/addwork}" th:object="${work}" method="post" name="sentMessage">
-                <p><input type="hidden" th:field="*{id}"/></p>
+                <p><input type="text" th:field="*{resume.id}"/></p>
+                <p><input type="text" th:field="*{id}"/></p>
                 <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
                         <label>Company</label>
@@ -97,16 +98,16 @@
 
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper/popper.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/popper/popper.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="js/jqBootstrapValidation.js"></script>
-<script src="js/contact_me.js"></script>
+<script src="../js/jqBootstrapValidation.js"></script>
+<script src="../js/contact_me.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="js/clean-blog.min.js"></script>
+<script src="../js/clean-blog.min.js"></script>
 
 
 </body>

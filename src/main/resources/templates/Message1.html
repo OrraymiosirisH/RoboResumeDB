@@ -2,61 +2,196 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Comfirm</title>
+    <title>Modify Work Exprience</title>
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
-
-</head>
-
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
 <body>
 
 
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('img/post-bg.jpg')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-heading">
-                    <h1>Great! Your Educational Information has been sent!</h1>
-                    <h2 class="subheading"th:text="'Welcome ' + ${resume.name}"></h2>
-                    <span class="meta">
-                <a href = "/addedu"> <strong>Press Here to Continue adding Educational Background.</strong></a>
-              </span>
+<div th:replace="base1 :: navlinkss"></div>
 
-                </div>
-            </div>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+            <h1>Please Built up your resume!</h1>
+            <!--<h2 class="subheading"th:text="Please Built up your resume!"></h2>-->
+
+
+            <table class="table table-striped">
+            <tr>
+            <th>Person</th>
+            <th>Actions</th>
+
+            </tr>
+            <tr th:each="toes:${reslist}">
+
+            <td th:text="${toes.name}"></td>
+
+            <td>
+            <a th:href="@{/addedu/{id}(id=${toes.id})}">Education-</a>
+                <a th:href="@{/addwork/{id}(id=${toes.id})}">Expirience-</a>
+                <a th:href="@{/addskill/{id}(id=${toes.id})}">Skills</a>
+                <a th:href="@{/report/{id}(id=${toes.id})}">Report</a>
+            </td>
+            </tr>
+            </table>
+
+
+            </form>
+
         </div>
     </div>
-</header>
+</div>
+
 
 <div th:replace="base1 :: footer"></div>
 
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper/popper.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Custom fonts for this template -->
+<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+      type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+      rel='stylesheet' type='text/css'>
 
-<!-- Contact Form JavaScript -->
-<script src="js/jqBootstrapValidation.js"></script>
-<script src="js/contact_me.js"></script>
-
-<!-- Custom scripts for this template -->
-<script src="js/clean-blog.min.js"></script>
-
-
-
+<!-- Custom styles for this template -->
+<link href="../css/clean-blog.min.css" rel="stylesheet">
 </body>
 </html>
 
 
 
 
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title>Add Educational BackGround</title>-->
+
+    <!--&lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+    <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!--&lt;!&ndash; Custom fonts for this template &ndash;&gt;-->
+    <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <!--<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'-->
+          <!--type='text/css'>-->
+    <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'-->
+          <!--rel='stylesheet' type='text/css'>-->
+
+    <!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+    <!--<link href="../css/clean-blog.min.css" rel="stylesheet">-->
+<!--<body>-->
+
+
+<!--&lt;!&ndash; Page Header &ndash;&gt;-->
+<!--<header class="masthead" style="background-image: url('img/post-bg.jpg')">-->
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-8 col-md-10 mx-auto">-->
+                <!--<div class="post-heading">-->
+                    <!--<h1>Great! Your Personal Information has been Up Loaded!</h1>-->
+                    <!--<h2 class="subheading"th:text="'Welcome ' + ${resume.name}"></h2>-->
+                    <!--<span class="meta">-->
+
+                        <!--<table class="table table-striped">-->
+                        <!--<tr>-->
+                        <!--<th>Person</th>-->
+
+                        <!--&lt;!&ndash;<th>Action</th>&ndash;&gt;-->
+                        <!--</tr>-->
+                        <!--<tr th:each="toes : ${reslist}">-->
+
+                        <!--<td th:text="${toes.name}"></td>-->
+
+                        <!--<td>-->
+                        <!--<a th:href="@{/addedu/{id}(id=${toes.id})}">Press here to add Educational Background</a>-->
+
+                        <!--&lt;!&ndash;<a th:href="@{/deleteskill/{id}(id=${Skk.id})}">Delete</a>&ndash;&gt;-->
+                        <!--</td>-->
+                        <!--</tr>-->
+                        <!--</table>-->
+
+            <!--&lt;!&ndash;<a href = "/adedu"> <strong>Press Here to Continue adding Educational Background.</strong></a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href = "@{/addedu/{id}(id=${resume.id})}"> <strong>Press Here to Continue adding Educational Background.</strong></a>&ndash;&gt;-->
+
+              <!--</span>-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</header>-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Main Content &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="col-lg-14 col-md-18 mx-auto">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<h2 class="intro-text text-center">&ndash;&gt;-->
+                <!--&lt;!&ndash;<strong>Skill</strong>&ndash;&gt;-->
+            <!--&lt;!&ndash;</h2>&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;<table class="table table-striped">&ndash;&gt;-->
+                <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<th>Skill</th>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<th>Action</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<tr th:each="Skk : ${allskill}">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<td th:text="${Skk.ski}"></td>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a th:href="@{/updateskill/{id}(id=${Skk.id})}">Update</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a th:href="@{/deleteskill/{id}(id=${Skk.id})}">Delete</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;</table>&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;<p><a href="/report"> <strong>Press Here Final Report.</strong></a></p>&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--<div th:replace="base1 :: footer"></div>-->
+
+
+<!--&lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+<!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+<!--&lt;!&ndash; Custom fonts for this template &ndash;&gt;-->
+<!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+<!--<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'-->
+      <!--type='text/css'>-->
+<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'-->
+      <!--rel='stylesheet' type='text/css'>-->
+
+<!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--<link href="../css/clean-blog.min.css" rel="stylesheet">-->
+
+<!--</body>-->
+<!--</html>-->
