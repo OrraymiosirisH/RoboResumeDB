@@ -40,8 +40,8 @@
             <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
             <form role="form"th:action="@{/addedu}" th:object="${educational}" method="post" name="sentMessage">
 
-                <p><input type="text" th:field="*{resume.id}"/></p>
-                <p><input type="text" th:field="*{id}"/></p>
+                <p><input type="hidden" th:field="*{resume.id}"/></p>
+                <p><input type="hidden" th:field="*{id}"/></p>
                 <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
                         <label>College/University</label>
@@ -89,6 +89,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-secondary" id="sendMessageButton">Send</button>
                 </div>
+
             </form>
         </div>
     </div>

@@ -24,7 +24,7 @@
 <div th:replace="base1 :: navlinkss"></div>
 
 <p>Thank you for join us, your process has been completed!.</p>
-<p>Use the bar above to modify any previous entries.</p>
+<!--<p>Use the bar above to modify any previous entries.</p>-->
 
 <!-- Main Content -->
 <div class="container">
@@ -41,7 +41,7 @@
                     <th>Email</th>
                     <th>Last Name</th>
                 </tr>
-                <tr th:each="Resume : ${listofcostumer}">
+                <tr th:each="Resume : ${reslist}">
 
                     <td th:text="${Resume.name}"></td>
                     <td th:text="${Resume.email}"></td>
@@ -64,7 +64,8 @@
                     <th>Completed</th>
                     <th>Degree</th>
                 </tr>
-                <tr th:each="Educational : ${listofeduc}">
+                <th:block th:each="Resume : ${reslist}">
+                    <tr th:each="Educational : ${Resume.educationals}">
 
                     <td th:text="${Educational.inst}"></td>
                     <td th:text="${Educational.major}"></td>
@@ -73,7 +74,9 @@
                     <td th:text="${Educational.degree}"></td>
 
 
-                </tr>
+                    </tr>
+                </th:block>
+
             </table>
 
             <div class="post-heading">
@@ -88,15 +91,16 @@
                     <th>Telephone</th>
                     <th>Duties</th>
                 </tr>
-                <tr th:each="Work : ${listofwork}">
+                <th:block th:each="Resume : ${reslist}">
+                    <tr th:each="Work : ${Resume.works}">
 
                     <td th:text="${Work.company}"></td>
                     <td th:text="${Work.job}"></td>
                     <td th:text="${Work.sup}"></td>
                     <td th:text="${Work.tel}"></td>
                     <td th:text="${Work.duties}"></td>
-
-                </tr>
+                    </tr>
+                </th:block>
             </table>
 
 
@@ -109,18 +113,19 @@
                     <th>Skills</th>
 
                 </tr>
-                <tr th:each="Skill : ${listofskiller}">
+                <th:block th:each="Resume : ${reslist}">
+                    <tr th:each="Skill : ${Resume.skillss}">
 
                     <td th:text="${Skill.ski}"></td>
 
                 </tr>
+                </th:block>
             </table>
         </div>
     </div>
 </div>
 
 <hr>
-
 
 
 <div th:replace="base1 :: footer"></div>

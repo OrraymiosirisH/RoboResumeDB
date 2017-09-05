@@ -40,7 +40,7 @@
                         <th>Last Name</th>
                         <th>Action</th>
                     </tr>
-                    <tr th:each="perso : ${allpersonal}">
+                    <tr th:each="perso : ${reslist}">
 
                         <td th:text="${perso.name}"></td>
                         <td th:text="${perso.email}"></td>

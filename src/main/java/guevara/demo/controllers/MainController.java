@@ -45,6 +45,13 @@ public String Login(){
         return "welcome";
     }
 
+    @GetMapping("/welcome")
+    public String load2Index(Model toSend) {
+        toSend.addAttribute("resume", new Resume());
+        return "welcome";
+    }
+
+
     @PostMapping("/welcome")
     public String processIndex(@Valid @ModelAttribute("resume") Resume resume, BindingResult result) {
         if (result.hasErrors()) {
@@ -140,7 +147,7 @@ public String Login(){
     public String processSk(@Valid @ModelAttribute("skill") Skill skill, BindingResult honda) {
 
         if (honda.hasErrors()) {
-            return "addskill";
+            return "redirect:/Message1";
 
         }
 
@@ -152,24 +159,43 @@ public String Login(){
 
     }
 
-    @GetMapping("/report")
-    public String repoFinal(Model sendModel, @ModelAttribute("resume") Resume resume) {
 
 
-        Iterable<Resume> res = resumeRepository.findAll();
-        Iterable<Educational> educ = educationalRepository.findAll();
-        Iterable<Work> workexp = workRepository.findAll();
-        Iterable<Skill> skiller = skillRepository.findAll();
+    @GetMapping("/report/{id}")
+    public String repoFinal(@PathVariable("id") long id, Model model) {
 
-        sendModel.addAttribute("listofcostumer", res);
-        sendModel.addAttribute("listofeduc", educ);
-        sendModel.addAttribute("listofwork", workexp);
-        sendModel.addAttribute("listofskiller", skiller);
-
+       model.addAttribute("reslist", resumeRepository.findResumeById(id));
 
         return "report";
     }
 
+//    @GetMapping("/report")
+//    public String repoFinal(Model sendModel, @ModelAttribute("resume") Resume resume) {
+//
+//
+//        Iterable<Resume> res = resumeRepository.findAll();
+//        Iterable<Educational> educ = educationalRepository.findAll();
+//        Iterable<Work> workexp = workRepository.findAll();
+//        Iterable<Skill> skiller = skillRepository.findAll();
+//
+//        sendModel.addAttribute("listofcostumer", res);
+//        sendModel.addAttribute("listofeduc", educ);
+//        sendModel.addAttribute("listofwork", workexp);
+//        sendModel.addAttribute("listofskiller", skiller);
+//
+//
+//        return "report";
+//    }
+
+
+    @RequestMapping("/message2")
+
+    public String saysaysay(Model model) {
+       model.addAttribute("reslist", resumeRepository.findAll());
+        return "message2";
+
+
+    }
     @RequestMapping("/final")
 
     public String sayhello() {
@@ -181,10 +207,10 @@ public String Login(){
 
 
 
-    @RequestMapping("/personal")
+    @RequestMapping("/personal/{id}")
 
-    public String myPersonal(Model model) {
-            model.addAttribute ("allpersonal", resumeRepository.findAll());
+    public String myPersonal(@PathVariable("id") long id, Model model) {
+            model.addAttribute ("resume", resumeRepository.findOne(id));
 
         return "personal";
 
